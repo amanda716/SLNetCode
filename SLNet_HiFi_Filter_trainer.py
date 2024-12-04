@@ -212,6 +212,7 @@ def test(model, blur_matrix_right, feature_len, n_test_size):
 
 # ======================== Start Here ========================
 if __name__ == "__main__":
+    
     if len(sys.argv) < 1:
         print('Please specify which GPU to use ...')
         exit(0)
@@ -225,6 +226,11 @@ if __name__ == "__main__":
     blur_matrix_right = generate_blur_matrix_complex(wind_type=wind_type, wind_len=wind_len, padded_len=padded_len, crop_len=crop_len)
     scio.savemat('SLNet_HiFi_A_' + wind_type + '_W' + str(wind_len) + '.mat', {'A':blur_matrix_right})
 
+    # Ensure the output directory exists
+    output_dir = os.path.dirname(str_modelname_prefix)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
     # Load or fabricate model
     if use_existing_model:
         print('Model loading...')
