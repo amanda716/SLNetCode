@@ -216,6 +216,7 @@ def load_data_to_array(path_to_data):
 def load_data_to_loader(data_dir):
     # Template function
     print('Loading data...')
+    print('data_dir...')    
     # Load numpy => data,label (numpy array)
     data, label = load_data_to_array(data_dir)
     n_class_loaded = np.unique(label).shape[0]
