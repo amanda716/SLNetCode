@@ -20,7 +20,7 @@ W = 251                             # <====
 wind_type = 'gaussian'              # <====
 use_fusion_filter_pconv = 3         # 1: fusion+filter+pconv; 2: filter+pconv; 3: pconv;
 downsamp_ratio_for_stft = 10        # 100Hz / 10 = 10Hz        # <====
-data_dir = 'xxx/' # <====
+data_dir = 'user3-1-1-1-1-r1' # <====
 epoch_filter = 5000
 W_all = [125,251,501]
 W_all.sort()
