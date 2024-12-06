@@ -1,19 +1,22 @@
-import os,sys,math,scipy,imp
+import importlib
+import os
+import scipy
+import sys
+from math import sqrt, log, pi
+
 import numpy as np
 import scipy.io as scio
-
-import torch, torchvision
+import torch
 import torch.nn as nn
 from scipy import signal
-from math import sqrt,log,pi
-from torch.fft import fft,ifft
-from torch.nn.functional import relu, softmax, cross_entropy
-from torch import sigmoid,tanh
+from torch import tanh
 from torch.nn import MSELoss as MSE
 
-custom_layers_torch = imp.load_source('custom_layers_torch', 'Modules/custom_layers_torch.py')
-from custom_layers_torch import m_cconv3d, m_Linear, m_Filtering, m_pconv3d
+# 使用 importlib 导入模块
+custom_layers_torch = importlib.import_module('Modules.custom_layers_torch')
 
+# 使用模块中的函数
+from Modules.custom_layers_torch import m_Linear
 
 # Definition
 use_existing_model = False

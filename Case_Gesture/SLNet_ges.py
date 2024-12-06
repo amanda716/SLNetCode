@@ -1,18 +1,20 @@
-import os,sys,math,scipy,imp
+import importlib
+import os
+import sys
+import importlib.util
 import numpy as np
 import scipy.io as scio
-
-import torch, torchvision
+import torch
 import torch.nn as nn
-from torch.nn.functional import relu, softmax, cross_entropy
-from torch import sigmoid,tanh
+from torch.nn.functional import relu
 
-custom_layers_torch = imp.load_source('custom_layers_torch', 'Modules/custom_layers_torch.py')
-SLNet_HiFi_Filter_trainer = imp.load_source('SLNet_HiFi_Filter_trainer', 'SLNet_HiFi_Filter_trainer.py')
-from custom_layers_torch import m_cconv3d, m_Linear, m_Filtering, m_pconv3d
-from SLNet_HiFi_Filter_trainer import SLNet_HiFi_Filter, complex_array_to_bichannel_float_tensor, bichannel_float_tensor_to_complex_array
-from thop import profile
-from torchprofile import profile_macs
+
+custom_layers_torch = importlib.util.spec_from_file_location('custom_layers_torch', 'Modules/custom_layers_torch.py')
+SLNet_HiFi_Filter_trainer = importlib.import_module('SLNet_HiFi_Filter_trainer', 'SLNet_HiFi_Filter_trainer.py')
+
+
+from Modules.custom_layers_torch import m_Linear, m_pconv3d
+from SLNet_HiFi_Filter_trainer import complex_array_to_bichannel_float_tensor, bichannel_float_tensor_to_complex_array
 
 # Definition
 use_existing_SLNet_model = False    # Note: NOT HiFiFilter model
@@ -20,7 +22,7 @@ W = 251                             # <====
 wind_type = 'gaussian'              # <====
 use_fusion_filter_pconv = 3         # 1: fusion+filter+pconv; 2: filter+pconv; 3: pconv;
 downsamp_ratio_for_stft = 10        # 100Hz / 10 = 10Hz        # <====
-data_dir = '/' # <====
+data_dir = '/data/' # <====
 epoch_filter = 5000
 W_all = [125,251,501]
 W_all.sort()
